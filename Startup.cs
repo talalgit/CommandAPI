@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using CommandAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using CommandAPI.Data;
 
 namespace CommandAPI
 {
@@ -25,6 +28,8 @@ namespace CommandAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<CommandContext>(option => option.UseSqlServer(Configuration.GetConnectionString("CommandString")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
